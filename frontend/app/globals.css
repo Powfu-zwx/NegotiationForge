@@ -1,0 +1,16 @@
+﻿@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+  --forge-bg: #0e0f11; --forge-surface: #16181d; --forge-border: #2a2d35;
+  --forge-muted: #4a4f5e; --forge-text: #d6d9e0; --forge-accent: #e8a838;
+  --forge-accent-dim: #7a5418; --forge-danger: #e05c5c;
+}
+* { box-sizing: border-box; }
+html, body { background-color: var(--forge-bg); color: var(--forge-text); font-family: "IBM Plex Mono", ui-monospace, monospace; -webkit-font-smoothing: antialiased; }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--forge-bg); }
+::-webkit-scrollbar-thumb { background: var(--forge-border); border-radius: 2px; }
+::selection { background: var(--forge-accent-dim); color: var(--forge-text); }
+:focus-visible { outline: 1.5px solid var(--forge-accent); outline-offset: 2px; }
