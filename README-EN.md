@@ -47,40 +47,26 @@ This project is closer to a negotiation workbench than a simple chat demo. It is
 
 ## 🖼️ Preview
 
+<p align="center">
+  <img src="./docs/images/screenshot-home.png" alt="Home View" width="92%" />
+  <br />
+  <sub>Home and scenario board: choose an opening path and inspect the mission setup</sub>
+</p>
+
+<p align="center">
+  <img src="./docs/images/screenshot-workspace.png" alt="Workspace Overview" width="92%" />
+  <br />
+  <sub>Main workspace: live negotiation, tactical analysis, and fork-tree panel in one layout</sub>
+</p>
+
 <table>
   <tr>
-    <td colspan="2" align="center">
-      <img src="./docs/images/screenshot-home.png" alt="Home View" width="100%" />
-      <br />
-      <sub>Home and scenario board: choose an opening path and inspect the mission setup</sub>
-    </td>
-  </tr>
-  <tr>
-    <td colspan="2" align="center">
-      <img src="./docs/images/screenshot-workspace.png" alt="Workspace Overview" width="100%" />
-      <br />
-      <sub>Main workspace: live negotiation, tactical analysis, and fork-tree panel in one layout</sub>
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <img src="./docs/images/screenshot-analysis-radar.png" alt="Analysis Radar" width="100%" />
-      <br />
-      <sub>Analysis panel: five-dimension radar chart</sub>
-    </td>
-    <td align="center">
-      <img src="./docs/images/screenshot-analysis-trend.png" alt="Analysis Trend" width="100%" />
-      <br />
-      <sub>Analysis panel: agreement probability trend</sub>
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
+    <td width="50%" align="center">
       <img src="./docs/images/screenshot-recap.png" alt="Recap View" width="100%" />
       <br />
       <sub>Recap view: outcome summary, turning points, and improvement suggestions</sub>
     </td>
-    <td align="center">
+    <td width="50%" align="center">
       <img src="./docs/images/screenshot-fork-tree.png" alt="Fork Tree View" width="100%" />
       <br />
       <sub>Fork-tree view: alternative branches and layered downstream simulations</sub>

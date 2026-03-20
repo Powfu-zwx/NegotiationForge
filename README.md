@@ -47,40 +47,26 @@ NegotiationForge 是一个面向谈判训练、策略实验与决策推演的 AI
 
 ## 🖼️ 界面预览
 
+<p align="center">
+  <img src="./docs/images/screenshot-home.png" alt="Home View" width="92%" />
+  <br />
+  <sub>首页与场景面板：选择起始主线，查看对手画像与任务入口</sub>
+</p>
+
+<p align="center">
+  <img src="./docs/images/screenshot-workspace.png" alt="Workspace Overview" width="92%" />
+  <br />
+  <sub>正式谈判工作台：聊天、态势分析与分叉树区域并列展示</sub>
+</p>
+
 <table>
   <tr>
-    <td colspan="2" align="center">
-      <img src="./docs/images/screenshot-home.png" alt="Home View" width="100%" />
-      <br />
-      <sub>首页与场景面板：选择起始主线，查看对手画像与任务入口</sub>
-    </td>
-  </tr>
-  <tr>
-    <td colspan="2" align="center">
-      <img src="./docs/images/screenshot-workspace.png" alt="Workspace Overview" width="100%" />
-      <br />
-      <sub>正式谈判工作台：聊天、态势分析与分叉树区域并列展示</sub>
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <img src="./docs/images/screenshot-analysis-radar.png" alt="Analysis Radar" width="100%" />
-      <br />
-      <sub>分析面板：五维雷达图</sub>
-    </td>
-    <td align="center">
-      <img src="./docs/images/screenshot-analysis-trend.png" alt="Analysis Trend" width="100%" />
-      <br />
-      <sub>分析面板：达成概率趋势</sub>
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
+    <td width="50%" align="center">
       <img src="./docs/images/screenshot-recap.png" alt="Recap View" width="100%" />
       <br />
       <sub>复盘界面：总结结果、关键节点与改进建议</sub>
     </td>
-    <td align="center">
+    <td width="50%" align="center">
       <img src="./docs/images/screenshot-fork-tree.png" alt="Fork Tree View" width="100%" />
       <br />
       <sub>分叉树界面：关键节点替代路径与后续推演</sub>
