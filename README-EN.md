@@ -50,21 +50,40 @@ This project is closer to a negotiation workbench than a simple chat demo. It is
 <table>
   <tr>
     <td colspan="2" align="center">
-      <img src="./docs/images/screenshot-workspace.svg" alt="Workspace Overview" width="100%" />
+      <img src="./docs/images/screenshot-home.png" alt="Home View" width="100%" />
       <br />
-      <sub>Main workspace: live negotiation, analysis, recap, and fork-tree entry points</sub>
+      <sub>Home and scenario board: choose an opening path and inspect the mission setup</sub>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center">
+      <img src="./docs/images/screenshot-workspace.png" alt="Workspace Overview" width="100%" />
+      <br />
+      <sub>Main workspace: live negotiation, tactical analysis, and fork-tree panel in one layout</sub>
     </td>
   </tr>
   <tr>
     <td align="center">
-      <img src="./docs/images/screenshot-recap.svg" alt="Recap View" width="100%" />
+      <img src="./docs/images/screenshot-analysis-radar.png" alt="Analysis Radar" width="100%" />
       <br />
-      <sub>Recap view: outcome summary, turning points, and improvement direction</sub>
+      <sub>Analysis panel: five-dimension radar chart</sub>
     </td>
     <td align="center">
-      <img src="./docs/images/screenshot-fork-tree.svg" alt="Fork Tree View" width="100%" />
+      <img src="./docs/images/screenshot-analysis-trend.png" alt="Analysis Trend" width="100%" />
       <br />
-      <sub>Fork-tree view: alternative user strategies and layered follow-up responses</sub>
+      <sub>Analysis panel: agreement probability trend</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="./docs/images/screenshot-recap.png" alt="Recap View" width="100%" />
+      <br />
+      <sub>Recap view: outcome summary, turning points, and improvement suggestions</sub>
+    </td>
+    <td align="center">
+      <img src="./docs/images/screenshot-fork-tree.png" alt="Fork Tree View" width="100%" />
+      <br />
+      <sub>Fork-tree view: alternative branches and layered downstream simulations</sub>
     </td>
   </tr>
 </table>
