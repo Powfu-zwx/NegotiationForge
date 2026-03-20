@@ -1,0 +1,63 @@
+<svg width="1600" height="920" viewBox="0 0 1600 920" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="920" rx="30" fill="#0B0F14"/>
+  <rect x="24" y="24" width="1552" height="872" rx="24" fill="#0F141B" stroke="#1F2A37"/>
+
+  <rect x="48" y="48" width="1504" height="64" rx="18" fill="#101826" stroke="#243246"/>
+  <text x="78" y="89" fill="#F6F2E8" font-size="34" font-family="Segoe UI, Arial, sans-serif" font-weight="700">NegotiationForge</text>
+  <text x="78" y="106" fill="#8F9FB8" font-size="14" font-family="Segoe UI, Arial, sans-serif">Workspace overview</text>
+  <rect x="1258" y="64" width="92" height="32" rx="16" fill="#192334"/>
+  <text x="1288" y="85" fill="#B7C5D9" font-size="15" font-family="Segoe UI, Arial, sans-serif">Local</text>
+  <rect x="1364" y="64" width="140" height="32" rx="16" fill="#1B2535"/>
+  <text x="1393" y="85" fill="#B7C5D9" font-size="15" font-family="Segoe UI, Arial, sans-serif">DeepSeek</text>
+
+  <rect x="48" y="138" width="1020" height="696" rx="22" fill="#0C121A" stroke="#1D2A3D"/>
+  <rect x="1088" y="138" width="464" height="336" rx="22" fill="#101723" stroke="#233146"/>
+  <rect x="1088" y="494" width="464" height="340" rx="22" fill="#101723" stroke="#233146"/>
+
+  <rect x="72" y="166" width="972" height="56" rx="16" fill="#121B28"/>
+  <text x="96" y="201" fill="#F8EEDA" font-size="22" font-family="Segoe UI, Arial, sans-serif" font-weight="600">Salary negotiation · HR Director</text>
+  <rect x="839" y="180" width="86" height="28" rx="14" fill="#1E293B"/>
+  <text x="861" y="199" fill="#A4B2C6" font-size="14" font-family="Segoe UI, Arial, sans-serif">Round 4</text>
+  <rect x="936" y="180" width="82" height="28" rx="14" fill="#2E1D0F"/>
+  <text x="956" y="199" fill="#F4C05C" font-size="14" font-family="Segoe UI, Arial, sans-serif">Active</text>
+
+  <rect x="72" y="244" width="972" height="520" rx="18" fill="#0A0F16" stroke="#192536"/>
+  <rect x="96" y="270" width="442" height="84" rx="18" fill="#1A2230"/>
+  <text x="120" y="303" fill="#F7F3E8" font-size="20" font-family="Segoe UI, Arial, sans-serif">User</text>
+  <text x="120" y="333" fill="#B3C0D2" font-size="17" font-family="Segoe UI, Arial, sans-serif">I can accept the scope, but I need a compensation revision to reflect the impact.</text>
+
+  <rect x="574" y="374" width="446" height="96" rx="18" fill="#111A27"/>
+  <text x="598" y="408" fill="#F4BF61" font-size="20" font-family="Segoe UI, Arial, sans-serif">Opponent</text>
+  <text x="598" y="438" fill="#D2DBE7" font-size="17" font-family="Segoe UI, Arial, sans-serif">The budget is constrained, but we can discuss a phased adjustment tied to deliverables.</text>
+
+  <rect x="96" y="492" width="466" height="92" rx="18" fill="#1A2230"/>
+  <text x="120" y="526" fill="#F7F3E8" font-size="20" font-family="Segoe UI, Arial, sans-serif">User</text>
+  <text x="120" y="556" fill="#B3C0D2" font-size="17" font-family="Segoe UI, Arial, sans-serif">If the adjustment is phased, I need the milestones and written review points clarified now.</text>
+
+  <rect x="72" y="786" width="972" height="48" rx="14" fill="#121B28" stroke="#263347"/>
+  <text x="100" y="817" fill="#7588A5" font-size="17" font-family="Segoe UI, Arial, sans-serif">Type your response...  Enter to send  Shift+Enter for newline</text>
+  <rect x="930" y="794" width="90" height="32" rx="10" fill="#F3B53E"/>
+  <text x="960" y="815" fill="#141414" font-size="16" font-family="Segoe UI, Arial, sans-serif" font-weight="700">SEND</text>
+
+  <text x="1120" y="178" fill="#EDE6D6" font-size="24" font-family="Segoe UI, Arial, sans-serif" font-weight="700">Situation Analysis</text>
+  <rect x="1116" y="208" width="184" height="92" rx="16" fill="#141F2E"/>
+  <rect x="1316" y="208" width="200" height="92" rx="16" fill="#141F2E"/>
+  <rect x="1116" y="314" width="184" height="92" rx="16" fill="#141F2E"/>
+  <rect x="1316" y="314" width="200" height="92" rx="16" fill="#141F2E"/>
+  <text x="1140" y="242" fill="#8EA1BC" font-size="15" font-family="Segoe UI, Arial, sans-serif">Leverage</text>
+  <text x="1138" y="284" fill="#53D1FF" font-size="40" font-family="Segoe UI, Arial, sans-serif" font-weight="700">72</text>
+  <text x="1340" y="242" fill="#8EA1BC" font-size="15" font-family="Segoe UI, Arial, sans-serif">Agreement Odds</text>
+  <text x="1338" y="284" fill="#F6BC4D" font-size="40" font-family="Segoe UI, Arial, sans-serif" font-weight="700">64%</text>
+  <text x="1140" y="348" fill="#8EA1BC" font-size="15" font-family="Segoe UI, Arial, sans-serif">Info Advantage</text>
+  <text x="1138" y="390" fill="#B9D7FF" font-size="40" font-family="Segoe UI, Arial, sans-serif" font-weight="700">58</text>
+  <text x="1340" y="348" fill="#8EA1BC" font-size="15" font-family="Segoe UI, Arial, sans-serif">Relationship</text>
+  <text x="1338" y="390" fill="#B9D7FF" font-size="40" font-family="Segoe UI, Arial, sans-serif" font-weight="700">61</text>
+
+  <text x="1120" y="534" fill="#EDE6D6" font-size="24" font-family="Segoe UI, Arial, sans-serif" font-weight="700">Recap and Fork Tree</text>
+  <rect x="1116" y="566" width="408" height="92" rx="16" fill="#141F2E"/>
+  <rect x="1116" y="676" width="408" height="126" rx="16" fill="#141F2E"/>
+  <text x="1140" y="600" fill="#E0E6EF" font-size="19" font-family="Segoe UI, Arial, sans-serif">Critical turning points identified</text>
+  <text x="1140" y="632" fill="#879AB4" font-size="16" font-family="Segoe UI, Arial, sans-serif">Auto-marked moments can be expanded into alternative negotiation paths.</text>
+  <text x="1140" y="710" fill="#F6C15C" font-size="19" font-family="Segoe UI, Arial, sans-serif">Fork tree explores 2-layer responses from key decisions.</text>
+  <text x="1140" y="742" fill="#879AB4" font-size="16" font-family="Segoe UI, Arial, sans-serif">Preserves the mainline conversation and attaches simulated branches per critical turn.</text>
+</svg>

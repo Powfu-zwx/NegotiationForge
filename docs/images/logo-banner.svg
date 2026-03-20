@@ -1,0 +1,44 @@
+<svg width="1280" height="320" viewBox="0 0 1280 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bannerBg" x1="100" y1="10" x2="1180" y2="310" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FCFCFA"/>
+      <stop offset="1" stop-color="#F3F6FB"/>
+    </linearGradient>
+    <linearGradient id="lineA" x1="152" y1="76" x2="336" y2="246" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1A9BE6"/>
+      <stop offset="1" stop-color="#1F3568"/>
+    </linearGradient>
+    <linearGradient id="lineB" x1="173" y1="90" x2="327" y2="228" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FACB62"/>
+      <stop offset="1" stop-color="#F39F12"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="12" y="12" width="1256" height="296" rx="28" fill="url(#bannerBg)"/>
+  <rect x="12" y="12" width="1256" height="296" rx="28" stroke="#E2E8F0" stroke-width="2"/>
+
+  <rect x="72" y="54" width="260" height="212" rx="44" fill="#0D1117"/>
+  <rect x="72" y="54" width="260" height="212" rx="44" stroke="#20304C" stroke-width="2"/>
+
+  <path d="M128 195C128 159.654 156.654 131 192 131H212C227.464 131 240 143.536 240 159V167C240 182.464 227.464 195 212 195H191L166 216V195H128Z" fill="#101825" stroke="url(#lineA)" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M144 140C144 121.222 159.222 106 178 106H208C219.046 106 228 114.954 228 126V134C228 145.046 219.046 154 208 154H189L171 170V154H164C152.954 154 144 145.046 144 134V140Z" fill="#101825" stroke="url(#lineB)" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M160 164H212" stroke="#49C9FF" stroke-width="4" stroke-linecap="round"/>
+  <path d="M175 180L186 164L198 180" stroke="#49C9FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="174" cy="128" r="5" fill="#F6B84A"/>
+  <circle cx="193" cy="128" r="5" fill="#F6B84A"/>
+  <circle cx="212" cy="128" r="5" fill="#F6B84A"/>
+
+  <rect x="378" y="76" width="2" height="168" rx="1" fill="#D5DFEF"/>
+
+  <text x="426" y="150" fill="#263238" font-size="76" font-family="Segoe UI, Arial, sans-serif" font-weight="700">NegotiationForge</text>
+  <text x="430" y="198" fill="#5D6B80" font-size="26" font-family="Segoe UI, Arial, sans-serif">Adversarial negotiation simulator and strategy rehearsal engine</text>
+
+  <g>
+    <rect x="430" y="226" width="126" height="34" rx="17" fill="#E9F8FF"/>
+    <text x="450" y="248" fill="#177DB6" font-size="18" font-family="Segoe UI, Arial, sans-serif">LLM Native</text>
+    <rect x="570" y="226" width="134" height="34" rx="17" fill="#FFF5DE"/>
+    <text x="592" y="248" fill="#A86B00" font-size="18" font-family="Segoe UI, Arial, sans-serif">Fork Tree</text>
+    <rect x="718" y="226" width="170" height="34" rx="17" fill="#EEF3FF"/>
+    <text x="738" y="248" fill="#3556A8" font-size="18" font-family="Segoe UI, Arial, sans-serif">FastAPI + Next.js</text>
+  </g>
+</svg>

@@ -1,0 +1,38 @@
+<svg width="240" height="240" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="28" y1="20" x2="214" y2="220" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#161A23"/>
+      <stop offset="1" stop-color="#0B0F15"/>
+    </linearGradient>
+    <linearGradient id="accentA" x1="64" y1="64" x2="176" y2="176" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#68E1FD"/>
+      <stop offset="1" stop-color="#0EA5E9"/>
+    </linearGradient>
+    <linearGradient id="accentB" x1="83" y1="74" x2="176" y2="171" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F9D976"/>
+      <stop offset="1" stop-color="#F39F12"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="16" y="16" width="208" height="208" rx="52" fill="url(#bg)"/>
+  <rect x="16" y="16" width="208" height="208" rx="52" stroke="#263043" stroke-width="2"/>
+
+  <path d="M64 157C64 121.654 92.6538 93 128 93H148C163.464 93 176 105.536 176 121V129C176 144.464 163.464 157 148 157H127L102 178V157H64Z" fill="#0E1420" stroke="url(#accentA)" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M80 102C80 83.2223 95.2223 68 114 68H144C155.046 68 164 76.9543 164 88V96C164 107.046 155.046 116 144 116H125L107 132V116H100C88.9543 116 80 107.046 80 96V102Z" fill="#0E1420" stroke="url(#accentB)" stroke-width="6" stroke-linejoin="round"/>
+
+  <circle cx="108" cy="92" r="5" fill="#F8B84E"/>
+  <circle cx="125" cy="92" r="5" fill="#F8B84E"/>
+  <circle cx="142" cy="92" r="5" fill="#F8B84E"/>
+
+  <circle cx="96" cy="128" r="6" fill="#52D1FF"/>
+  <circle cx="122" cy="128" r="6" fill="#52D1FF"/>
+  <circle cx="148" cy="128" r="6" fill="#52D1FF"/>
+  <circle cx="110" cy="144" r="6" fill="#52D1FF"/>
+  <circle cx="136" cy="144" r="6" fill="#52D1FF"/>
+
+  <path d="M96 128H148" stroke="#3FCBFF" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M110 144L122 128L136 144" stroke="#3FCBFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <path d="M58 186C76 165 94 158 119 158" stroke="#F0AB3D" stroke-width="4" stroke-linecap="round"/>
+  <path d="M180 184C162 163 145 158 119 158" stroke="#F0AB3D" stroke-width="4" stroke-linecap="round"/>
+</svg>

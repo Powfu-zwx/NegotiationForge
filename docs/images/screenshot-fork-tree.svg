@@ -1,0 +1,57 @@
+<svg width="1600" height="920" viewBox="0 0 1600 920" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="920" rx="30" fill="#0B0F14"/>
+  <rect x="42" y="42" width="1516" height="836" rx="26" fill="#10161F" stroke="#1F2B3C"/>
+
+  <text x="86" y="108" fill="#F4EDDE" font-size="42" font-family="Segoe UI, Arial, sans-serif" font-weight="700">Fork Tree Explorer</text>
+  <text x="86" y="144" fill="#92A3BA" font-size="20" font-family="Segoe UI, Arial, sans-serif">Mainline conversation with counterfactual branches from critical turns</text>
+
+  <rect x="86" y="188" width="428" height="610" rx="24" fill="#0C131D" stroke="#202D40"/>
+  <text x="118" y="234" fill="#EDE4CF" font-size="26" font-family="Segoe UI, Arial, sans-serif" font-weight="700">Mainline</text>
+
+  <rect x="118" y="268" width="364" height="96" rx="18" fill="#182230"/>
+  <text x="146" y="304" fill="#F4F7FA" font-size="21" font-family="Segoe UI, Arial, sans-serif">Turn 1 · User</text>
+  <text x="146" y="338" fill="#B4C0D2" font-size="17" font-family="Segoe UI, Arial, sans-serif">Opened with role scope and market alignment.</text>
+
+  <rect x="118" y="398" width="364" height="110" rx="18" fill="#182230"/>
+  <text x="146" y="434" fill="#F4F7FA" font-size="21" font-family="Segoe UI, Arial, sans-serif">Turn 2 · User · Critical</text>
+  <text x="146" y="468" fill="#B4C0D2" font-size="17" font-family="Segoe UI, Arial, sans-serif">Requested a compensation revision linked to expanded ownership.</text>
+  <rect x="340" y="416" width="118" height="28" rx="14" fill="#2B1D11"/>
+  <text x="365" y="435" fill="#F5C15D" font-size="14" font-family="Segoe UI, Arial, sans-serif">critical</text>
+
+  <rect x="118" y="542" width="364" height="96" rx="18" fill="#182230"/>
+  <text x="146" y="578" fill="#F4F7FA" font-size="21" font-family="Segoe UI, Arial, sans-serif">Turn 3 · Opponent</text>
+  <text x="146" y="612" fill="#B4C0D2" font-size="17" font-family="Segoe UI, Arial, sans-serif">Budget concerns introduced a phased adjustment.</text>
+
+  <rect x="562" y="188" width="420" height="262" rx="24" fill="#121D2C" stroke="#31445D"/>
+  <text x="594" y="236" fill="#F6C15B" font-size="24" font-family="Segoe UI, Arial, sans-serif" font-weight="700">Branch A · Apply Pressure</text>
+  <text x="594" y="280" fill="#E4EAF1" font-size="19" font-family="Segoe UI, Arial, sans-serif">User alternative</text>
+  <text x="594" y="312" fill="#9FB0C7" font-size="16" font-family="Segoe UI, Arial, sans-serif">State that the candidate has competing options and needs a concrete number now.</text>
+  <rect x="594" y="340" width="356" height="76" rx="18" fill="#172232"/>
+  <text x="620" y="372" fill="#E7ECF4" font-size="18" font-family="Segoe UI, Arial, sans-serif">Opponent immediate reply</text>
+  <text x="620" y="400" fill="#9FB0C7" font-size="15" font-family="Segoe UI, Arial, sans-serif">Pushes back on urgency and questions whether scope is fully aligned.</text>
+
+  <rect x="1014" y="188" width="470" height="262" rx="24" fill="#121D2C" stroke="#31445D"/>
+  <text x="1046" y="236" fill="#4ED0FF" font-size="24" font-family="Segoe UI, Arial, sans-serif" font-weight="700">Branch B · Reframe Value</text>
+  <text x="1046" y="280" fill="#E4EAF1" font-size="19" font-family="Segoe UI, Arial, sans-serif">User alternative</text>
+  <text x="1046" y="312" fill="#9FB0C7" font-size="16" font-family="Segoe UI, Arial, sans-serif">Anchor on business impact and ask for a written review plan rather than an immediate raise.</text>
+  <rect x="1046" y="340" width="406" height="76" rx="18" fill="#172232"/>
+  <text x="1072" y="372" fill="#E7ECF4" font-size="18" font-family="Segoe UI, Arial, sans-serif">Opponent immediate reply</text>
+  <text x="1072" y="400" fill="#9FB0C7" font-size="15" font-family="Segoe UI, Arial, sans-serif">Signals openness to milestones and a follow-up compensation checkpoint.</text>
+
+  <path d="M482 454C530 454 532 318 562 318" stroke="#3A4A63" stroke-width="4"/>
+  <path d="M482 454C550 454 560 318 1014 318" stroke="#3A4A63" stroke-width="4"/>
+
+  <rect x="628" y="526" width="356" height="236" rx="22" fill="#111927" stroke="#2B3B52"/>
+  <text x="656" y="570" fill="#F3F6FA" font-size="22" font-family="Segoe UI, Arial, sans-serif" font-weight="700">Layer 2 follow-up</text>
+  <text x="656" y="612" fill="#9FB0C7" font-size="17" font-family="Segoe UI, Arial, sans-serif">User follow-up:</text>
+  <text x="656" y="642" fill="#E5EAF1" font-size="16" font-family="Segoe UI, Arial, sans-serif">"If budget is fixed now, define the checkpoint and success metrics before I sign."</text>
+  <text x="656" y="690" fill="#9FB0C7" font-size="17" font-family="Segoe UI, Arial, sans-serif">Opponent final reply:</text>
+  <text x="656" y="720" fill="#E5EAF1" font-size="16" font-family="Segoe UI, Arial, sans-serif">"We can add a written review after 90 days with agreed deliverables."</text>
+
+  <rect x="1030" y="526" width="422" height="236" rx="22" fill="#111927" stroke="#2B3B52"/>
+  <text x="1058" y="570" fill="#F3F6FA" font-size="22" font-family="Segoe UI, Arial, sans-serif" font-weight="700">Layer 2 follow-up</text>
+  <text x="1058" y="612" fill="#9FB0C7" font-size="17" font-family="Segoe UI, Arial, sans-serif">User follow-up:</text>
+  <text x="1058" y="642" fill="#E5EAF1" font-size="16" font-family="Segoe UI, Arial, sans-serif">"Great, then let's align on measurable ownership targets and the review date now."</text>
+  <text x="1058" y="690" fill="#9FB0C7" font-size="17" font-family="Segoe UI, Arial, sans-serif">Opponent final reply:</text>
+  <text x="1058" y="720" fill="#E5EAF1" font-size="16" font-family="Segoe UI, Arial, sans-serif">"That works. I'll include the review condition and expected deliverables in the offer."</text>
+</svg>

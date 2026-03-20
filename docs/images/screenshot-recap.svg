@@ -1,0 +1,37 @@
+<svg width="1600" height="920" viewBox="0 0 1600 920" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="920" rx="30" fill="#0B0F14"/>
+  <rect x="100" y="64" width="1400" height="792" rx="28" fill="#121821" stroke="#2A3748"/>
+  <text x="156" y="146" fill="#F6F0E3" font-size="48" font-family="Segoe UI, Arial, sans-serif" font-weight="700">Negotiation Recap</text>
+  <text x="156" y="184" fill="#98A7BA" font-size="22" font-family="Segoe UI, Arial, sans-serif">Salary negotiation / HR Director / completed session</text>
+
+  <rect x="1288" y="100" width="128" height="44" rx="14" fill="#162031"/>
+  <text x="1332" y="129" fill="#C6D1DF" font-size="18" font-family="Segoe UI, Arial, sans-serif">Close</text>
+
+  <rect x="156" y="228" width="1288" height="1" fill="#243244"/>
+
+  <rect x="156" y="272" width="382" height="190" rx="22" fill="#151F2E"/>
+  <rect x="580" y="272" width="382" height="190" rx="22" fill="#151F2E"/>
+  <rect x="1004" y="272" width="440" height="190" rx="22" fill="#151F2E"/>
+  <text x="188" y="318" fill="#84B8FF" font-size="22" font-family="Segoe UI, Arial, sans-serif" font-weight="600">Session Outcome</text>
+  <text x="188" y="380" fill="#F6BC4D" font-size="54" font-family="Segoe UI, Arial, sans-serif" font-weight="700">Conditional Deal</text>
+  <text x="188" y="426" fill="#9EB0C9" font-size="18" font-family="Segoe UI, Arial, sans-serif">The negotiation stayed constructive but required written checkpoints.</text>
+  <text x="612" y="318" fill="#84B8FF" font-size="22" font-family="Segoe UI, Arial, sans-serif" font-weight="600">Key Strength</text>
+  <text x="612" y="380" fill="#F2F5F9" font-size="34" font-family="Segoe UI, Arial, sans-serif" font-weight="700">Clarified scope before conceding</text>
+  <text x="612" y="426" fill="#9EB0C9" font-size="18" font-family="Segoe UI, Arial, sans-serif">The user pressed for milestones and documentation instead of accepting vague promises.</text>
+  <text x="1036" y="318" fill="#84B8FF" font-size="22" font-family="Segoe UI, Arial, sans-serif" font-weight="600">Next Improvement</text>
+  <text x="1036" y="380" fill="#F2F5F9" font-size="34" font-family="Segoe UI, Arial, sans-serif" font-weight="700">Anchor earlier with quantified value</text>
+  <text x="1036" y="426" fill="#9EB0C9" font-size="18" font-family="Segoe UI, Arial, sans-serif">Bring impact metrics before discussing compensation to increase leverage sooner.</text>
+
+  <text x="156" y="528" fill="#F4E9D5" font-size="28" font-family="Segoe UI, Arial, sans-serif" font-weight="700">Turning Points</text>
+  <rect x="156" y="560" width="1288" height="236" rx="24" fill="#0F1724" stroke="#202C3E"/>
+
+  <circle cx="214" cy="640" r="10" fill="#4BC9FF"/>
+  <rect x="244" y="604" width="1130" height="72" rx="18" fill="#162132"/>
+  <text x="272" y="636" fill="#F4F7FA" font-size="22" font-family="Segoe UI, Arial, sans-serif">Turn 2 · User reframed the request around role scope and review timing</text>
+  <text x="272" y="666" fill="#90A3BD" font-size="17" font-family="Segoe UI, Arial, sans-serif">This shifted the discussion from “raise now or no” to a structured adjustment path.</text>
+
+  <circle cx="214" cy="728" r="10" fill="#F4BD53"/>
+  <rect x="244" y="692" width="1130" height="72" rx="18" fill="#162132"/>
+  <text x="272" y="724" fill="#F4F7FA" font-size="22" font-family="Segoe UI, Arial, sans-serif">Turn 4 · Opponent introduced phased compensation instead of rejecting outright</text>
+  <text x="272" y="754" fill="#90A3BD" font-size="17" font-family="Segoe UI, Arial, sans-serif">The dialogue remained open, but the burden shifted to getting concrete review checkpoints.</text>
+</svg>
