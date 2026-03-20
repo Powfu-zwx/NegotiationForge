@@ -5,7 +5,7 @@
 <h1 align="center">NegotiationForge</h1>
 
 <p align="center">
-  🤝 An adversarial negotiation simulator for live analysis, structured recap, and fork-tree exploration
+  🤝 An adversarial negotiation simulator for live analysis, structured recap, and fork-tree exploration, with local scenario and API customization
 </p>
 
 <p align="center">
@@ -34,6 +34,8 @@
 NegotiationForge is an AI system for negotiation training, tactical experimentation, and counterfactual decision rehearsal.
 
 You can choose a negotiation scenario, run a multi-round exchange against an AI opponent with explicit goals, bottom lines, patience, emotional state, and strategy shifts, then review the session through live tactical analysis, turning-point detection, structured recap generation, and fork-tree simulation from critical turns.
+
+Beyond the built-in scenarios, the project also includes a built-in `Local Setup` panel in the frontend. It lets you edit scenario JSON locally, save your own negotiation scenarios, and update API provider settings such as provider type, base URL, model, and key. In practice, that means many local experiments can be done directly from the UI instead of rewriting source files first.
 
 This project is closer to a negotiation workbench than a simple chat demo. It is useful for:
 
@@ -107,6 +109,13 @@ This project is closer to a negotiation workbench than a simple chat demo. It is
 - SQLite is the default persistence layer, so no external database is required for local runs
 - Environment configuration is minimal and straightforward
 - Frontend, backend, analysis, recap, and fork-tree logic are separated cleanly for future extension
+
+### 6. Local Scenario and API Customization
+
+- The frontend includes a built-in `Local Setup` panel for local API configuration
+- You can switch or edit DeepSeek, OpenAI-compatible, and Gemini keys, base URLs, and models
+- You can edit and save local scenario JSON directly into `backend/scenarios/*.json`
+- API changes take effect after a backend restart; saved scenarios can be refreshed into the homepage scenario board immediately
 
 ---
 
@@ -214,6 +223,15 @@ http://localhost:3000
 3. Exchange messages with the AI opponent
 4. Finish the negotiation and inspect analysis plus recap
 5. Trigger fork-tree generation and inspect alternative branches
+
+### 6. How to use custom scenarios and custom API settings
+
+If you want to use the project as a local experimentation workbench, open `Local Setup` from the top-right corner of the frontend:
+
+1. In the `API setup` tab, set or switch provider, API key, base URL, and model
+2. Restart the backend so the new configuration is reloaded from `backend/.env`
+3. In the `Scenarios` tab, edit the JSON template and save it into `backend/scenarios/*.json`
+4. Refresh the homepage and your custom local scenario will appear in the scenario board
 
 For a fuller walkthrough, see [docs/QUICKSTART-EN.md](./docs/QUICKSTART-EN.md)
 
