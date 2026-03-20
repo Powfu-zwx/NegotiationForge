@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.0",
+  "scenario_id": "custom_local_001",
+  "metadata": {
+    "title": "本地自定义场景",
+    "description": "在前端直接编辑并保存的谈判场景。",
+    "category": "职场",
+    "difficulty": "medium",
+    "estimated_rounds": 8
+  },
+  "context": {
+    "setting": "你和对手已经进入正式条件谈判。",
+    "background_shared": "双方都知道基础背景，但仍存在信息差。"
+  },
+  "player": {
+    "role": "候选人",
+    "identity": "本地用户",
+    "objective": "争取更好的条件",
+    "private_info": {
+      "current_salary": 20000,
+      "competing_offer": {
+        "exists": false,
+        "amount": null,
+        "company_attractiveness": null,
+        "description": null
+      },
+      "ideal_salary": 26000,
+      "reservation_point": 23000
+    },
+    "cards": []
+  },
+  "opponent": {
+    "role": "HR",
+    "name": "Alex",
+    "identity": "负责本次谈判的对手",
+    "personality": {
+      "style": "理性直接",
+      "pressure_response": "在压力下会要求更多证据再让步",
+      "rationality": 0.75,
+      "description": "重视数据和一致性，不喜欢空泛表态。"
+    },
+    "objective": "以较低成本完成谈判",
+    "private_info": {
+      "budget_ceiling": 28000,
+      "opening_offer": 22000,
+      "internal_valuation": 25000,
+      "has_backup_candidates": true,
+      "backup_candidates_quality": "medium",
+      "company_profit_pressure": true
+    },
+    "reservation_point": 21000,
+    "target": 22000,
+    "initial_state": {
+      "satisfaction": 50,
+      "patience": 75,
+      "current_strategy": "anchoring",
+      "disclosed_info": [],
+      "concession_history": []
+    }
+  },
+  "negotiation_structure": {
+    "phases": [
+      {
+        "phase_id": "opening",
+        "label": "开场锚定",
+        "typical_rounds": "1~2",
+        "description": "双方亮出初始立场。"
+      },
+      {
+        "phase_id": "probing",
+        "label": "试探摸底",
+        "typical_rounds": "3~4",
+        "description": "通过提问和回应探查底线。"
+      },
+      {
+        "phase_id": "bargaining",
+        "label": "实质交锋",
+        "typical_rounds": "5~7",
+        "description": "交换条件和让步。"
+      },
+      {
+        "phase_id": "closing",
+        "label": "收尾定案",
+        "typical_rounds": "8+",
+        "description": "推动达成或宣告破裂。"
+      }
+    ],
+    "termination_conditions": {
+      "agreement": "双方对关键数字与条件形成明确共识",
+      "breakdown": "任何一方明确拒绝继续谈判或耐心耗尽",
+      "max_rounds": 18
+    }
+  }
+}

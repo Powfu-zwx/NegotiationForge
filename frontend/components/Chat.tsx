@@ -1,64 +1,470 @@
-﻿"use client";
-import { useState, useRef, useEffect, useCallback } from "react";
-import { testLLM, type Message } from "@/lib/api";
-interface ChatMessage extends Message { id: string; pending?: boolean; }
-function MessageBubble({ msg }: { msg: ChatMessage }) {
-  const isUser = msg.role === "user";
+"use client";
+
+import { useEffect, useMemo, useRef, useState } from "react";
+
+import {
+  type CompletionStatusValue,
+  type SessionInfo,
+  type SessionStatusValue,
+} from "@/lib/api";
+import { useLocale } from "@/lib/locale-context";
+import {
+  getCopy,
+  getPhaseDescriptors,
+  localizeScenarioBriefing,
+} from "@/lib/localization";
+import {
+  formatAgreementDelta,
+  formatAgreementProbability,
+  type NegotiationMessageView,
+  type NegotiationPhaseId,
+  type ScenarioBriefingData,
+} from "@/lib/view-models";
+
+interface ChatProps {
+  session: SessionInfo;
+  scenarioBriefing: ScenarioBriefingData | null;
+  messages: NegotiationMessageView[];
+  input: string;
+  loading: boolean;
+  error: string | null;
+  endingStatus: CompletionStatusValue | null;
+  currentPhase: NegotiationPhaseId;
+  currentPhaseIndex: number;
+  sessionStatus: SessionStatusValue;
+  onInputChange: (value: string) => void;
+  onSend: () => void;
+  onCompleteSession: (status: CompletionStatusValue) => void;
+}
+
+export default function Chat({
+  session,
+  scenarioBriefing,
+  messages,
+  input,
+  loading,
+  error,
+  endingStatus,
+  currentPhase,
+  currentPhaseIndex,
+  sessionStatus,
+  onInputChange,
+  onSend,
+  onCompleteSession,
+}: ChatProps) {
+  const { locale } = useLocale();
+  const copy = getCopy(locale);
+  const localizedScenario = useMemo(
+    () => localizeScenarioBriefing(scenarioBriefing, locale),
+    [locale, scenarioBriefing]
+  );
+  const scenarioTitle = localizedScenario?.title ?? session.context_setting;
+  const opponentRole = localizedScenario?.opponentRole ?? session.opponent_role;
+  const contextSetting = localizedScenario?.contextSetting ?? session.context_setting;
+  const contextBackground = localizedScenario?.contextBackground ?? session.context_background;
+  const bottomRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [showBriefing, setShowBriefing] = useState(false);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
+  useEffect(() => {
+    const textarea = textareaRef.current;
+    if (!textarea) {
+      return;
+    }
+
+    textarea.style.height = "auto";
+    textarea.style.height = `${Math.min(textarea.scrollHeight, 180)}px`;
+  }, [input]);
+
   return (
-    <div className={`flex gap-3 animate-fade-up ${isUser ? "flex-row-reverse" : "flex-row"}`}>
-      <div className={`flex-shrink-0 w-7 h-7 rounded-sm text-[10px] font-mono font-semibold flex items-center justify-center border ${isUser ? "bg-forge-accent/10 border-forge-accent/30 text-forge-accent" : "bg-forge-danger/10 border-forge-danger/20 text-forge-danger"}`}>
-        {isUser ? "YOU" : "OPP"}
+    <section className="flat-panel flex h-full min-h-0 flex-col overflow-hidden">
+      <header className="shrink-0 border-b border-forge-border px-5 py-4">
+        <div className="flex items-start justify-between gap-4">
+          <div className="min-w-0 flex-1">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="forge-chip forge-chip-accent">{copy.chat.console}</span>
+              <span className="forge-chip">{localizedScenario?.category ?? copy.chat.phase}</span>
+              <span className="forge-chip">{session.opponent_name}</span>
+              <span className="forge-chip">{opponentRole}</span>
+            </div>
+            <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+              <h2 className="font-serif text-[1.45rem] leading-tight text-forge-text">
+                {scenarioTitle}
+              </h2>
+              <span className="text-xs uppercase tracking-[0.16em] text-forge-muted">
+                {contextSetting}
+              </span>
+            </div>
+            <p
+              className={`mt-2 max-w-4xl text-sm leading-6 text-forge-secondary ${
+                showBriefing
+                  ? ""
+                  : "overflow-hidden [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2]"
+              }`}
+            >
+              {contextBackground}
+            </p>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setShowBriefing((current) => !current)}
+            className="forge-button-secondary shrink-0"
+          >
+            {showBriefing
+              ? locale === "en"
+                ? "Collapse Brief"
+                : "收起背景"
+              : locale === "en"
+              ? "Expand Brief"
+              : "展开背景"}
+          </button>
+        </div>
+
+        <div className="mt-4">
+          <PhaseIndicator currentPhase={currentPhase} currentPhaseIndex={currentPhaseIndex} />
+        </div>
+      </header>
+
+      <div className="min-h-0 flex-1 overflow-y-auto px-5 py-5">
+        <div className="space-y-4 border-l border-forge-border pl-6">
+          {messages.map((message) => (
+            <TimelineNode
+              key={message.id}
+              message={message}
+              opponentName={session.opponent_name}
+            />
+          ))}
+
+          {error && (
+            <div className="border border-forge-danger/40 bg-forge-danger/10 px-4 py-3 text-sm leading-7 text-forge-danger">
+              {error}
+            </div>
+          )}
+
+          <div ref={bottomRef} />
+        </div>
       </div>
-      <div className={`max-w-[75%] px-4 py-3 rounded-sm border text-sm leading-relaxed ${isUser ? "bg-forge-user-bubble border-forge-border text-forge-text" : "bg-forge-ai-bubble border-forge-border/60 text-forge-text"}`}>
-        {msg.content}
-        {msg.pending && <span className="inline-block w-[7px] h-[14px] ml-1 bg-forge-accent animate-cursor-blink align-text-bottom" />}
+
+      <footer className="shrink-0 border-t border-forge-border px-5 py-4">
+        {sessionStatus === "active" ? (
+          <>
+            <div className="forge-terminal overflow-hidden">
+              <div className="flex items-center justify-between gap-4 border-b border-forge-border px-4 py-3">
+                <div className="flex items-center gap-2">
+                  <span className="h-2.5 w-2.5 rounded-full bg-forge-success" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-forge-alt" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-forge-danger" />
+                </div>
+                <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-forge-secondary">
+                  {locale === "en" ? "Negotiation Input" : "谈判输入"}
+                </p>
+              </div>
+
+              <div className="px-4 py-4">
+                <div className="flex items-end gap-4">
+                  <div className="min-w-0 flex-1 border border-forge-border bg-forge-surface px-4 py-3">
+                    <textarea
+                      ref={textareaRef}
+                      value={input}
+                      onChange={(event) => onInputChange(event.target.value)}
+                      onKeyDown={(event) => {
+                        if (event.key === "Enter" && !event.shiftKey) {
+                          event.preventDefault();
+                          onSend();
+                        }
+                      }}
+                      disabled={loading || endingStatus !== null}
+                      rows={1}
+                      placeholder={copy.chat.placeholder}
+                      className="max-h-[180px] w-full resize-none bg-transparent font-mono text-sm leading-7 text-forge-text placeholder:text-forge-muted focus:outline-none"
+                    />
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={onSend}
+                    disabled={!input.trim() || loading || endingStatus !== null}
+                    className="forge-button-primary"
+                  >
+                    {loading ? copy.chat.sending : copy.chat.send}
+                  </button>
+                </div>
+
+                <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
+                  <p className="text-xs leading-6 text-forge-secondary">
+                    {locale === "en"
+                      ? "Enter to send, Shift+Enter for a line break."
+                      : "Enter 发送，Shift+Enter 换行。"}
+                  </p>
+
+                  <div className="flex flex-wrap items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => void onCompleteSession("agreement")}
+                      disabled={loading || endingStatus !== null}
+                      className="rounded-sm border border-forge-success/40 bg-forge-success/10 px-4 py-2.5 text-[11px] font-mono uppercase tracking-[0.18em] text-forge-success transition-colors duration-150 hover:bg-forge-success/20 disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                      {endingStatus === "agreement" ? copy.chat.processing : copy.chat.markAgreement}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => void onCompleteSession("breakdown")}
+                      disabled={loading || endingStatus !== null}
+                      className="forge-button-danger"
+                    >
+                      {endingStatus === "breakdown" ? copy.chat.processing : copy.chat.markBreakdown}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        ) : (
+          <div className="border border-forge-border bg-forge-panel px-5 py-5">
+            <div className="flex flex-wrap items-start justify-between gap-4">
+              <div>
+                <p
+                  className={`text-[10px] font-mono uppercase tracking-[0.18em] ${
+                    sessionStatus === "agreement" ? "text-forge-success" : "text-forge-danger"
+                  }`}
+                >
+                  {sessionStatus === "agreement"
+                    ? copy.chat.readonlyTitleAgreement
+                    : copy.chat.readonlyTitleBreakdown}
+                </p>
+                <p className="mt-3 max-w-2xl text-sm leading-7 text-forge-secondary">
+                  {copy.chat.readonlyBody}
+                </p>
+              </div>
+
+              <span className="forge-chip">
+                {copy.chat.readOnly}
+              </span>
+            </div>
+          </div>
+        )}
+      </footer>
+    </section>
+  );
+}
+
+function TimelineNode({
+  message,
+  opponentName,
+}: {
+  message: NegotiationMessageView;
+  opponentName: string;
+}) {
+  const { locale } = useLocale();
+  const copy = getCopy(locale);
+  const isPlayer = message.role === "player";
+  const probabilityDelta = formatAgreementDelta(message.agreementDelta);
+  const probabilityLabel =
+    message.agreementProbability !== null && message.agreementProbability !== undefined
+      ? formatAgreementProbability(message.agreementProbability)
+      : null;
+  const indicatorValue =
+    message.agreementProbability !== null && message.agreementProbability !== undefined
+      ? Math.round(message.agreementProbability * 10)
+      : null;
+
+  return (
+    <div className="relative animate-fade-up">
+      <div className="absolute -left-11 top-3 flex w-8 flex-col items-center gap-2">
+        <div
+          className={`flex h-8 w-8 items-center justify-center border ${
+            isPlayer
+              ? "border-forge-accent/40 bg-forge-accent/15 text-forge-accent"
+              : "border-forge-success/40 bg-forge-success/10 text-forge-success"
+          }`}
+        >
+          <span className="text-[10px] font-mono uppercase tracking-[0.14em]">
+            {isPlayer ? copy.chat.you : opponentName.slice(0, 2)}
+          </span>
+        </div>
+      </div>
+
+      {message.isTurningPoint && (
+        <div className="mb-3 border border-forge-alt/40 bg-forge-alt/10 px-4 py-3">
+          <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-forge-alt">
+            {copy.chat.pivot}
+          </p>
+          {message.turningReason && (
+            <p className="mt-2 text-sm leading-7 text-forge-text">{message.turningReason}</p>
+          )}
+        </div>
+      )}
+
+      <div
+        className={`overflow-hidden border ${
+          isPlayer
+            ? "border-forge-accent/25 bg-forge-user-bubble"
+            : "border-forge-border/70 bg-forge-ai-bubble"
+        }`}
+      >
+        <div className="flex flex-wrap items-center gap-2 border-b border-forge-border px-5 py-3">
+          <span className={`forge-chip ${isPlayer ? "forge-chip-accent" : "forge-chip-success"}`}>
+            {isPlayer ? (locale === "en" ? "Your Move" : "我方动作") : opponentName}
+          </span>
+
+          {message.round !== undefined && (
+            <span className="forge-chip">{copy.common.round(message.round)}</span>
+          )}
+
+          {message.strategyTag && !isPlayer && (
+            <span className="forge-chip forge-chip-alt">{message.strategyTag}</span>
+          )}
+
+          {probabilityDelta && (
+            <span
+              className={`forge-chip ${
+                message.agreementDelta && message.agreementDelta >= 0
+                  ? "forge-chip-success"
+                  : "forge-chip-danger"
+              }`}
+            >
+              {copy.chat.agreementProbability} {probabilityDelta}
+            </span>
+          )}
+        </div>
+
+        <div className="px-5 py-4">
+          {!isPlayer && indicatorValue !== null && (
+            <div className="mb-4 flex items-center justify-between gap-3 border border-forge-border bg-forge-bg px-4 py-3">
+              <div>
+                <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-forge-muted">
+                  {copy.chat.currentProbability}
+                </p>
+                <p className="mt-2 text-sm text-forge-text">{probabilityLabel}</p>
+              </div>
+              <ConfidenceRail value={indicatorValue} />
+            </div>
+          )}
+
+          {message.pending ? (
+            <ThinkingBlock />
+          ) : (
+            <p className="text-[15px] leading-8 text-forge-text">{message.content}</p>
+          )}
+        </div>
       </div>
     </div>
   );
 }
-export default function Chat() {
-  const [messages, setMessages] = useState<ChatMessage[]>([{ id: "init", role: "assistant", content: "系统就绪。Phase 0 验证模式——直接与 LLM 对话，谈判场景将在 Phase 1 接入。" }]);
-  const [input, setInput] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const bottomRef = useRef<HTMLDivElement>(null);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-  useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages]);
-  useEffect(() => { const el = textareaRef.current; if (!el) return; el.style.height = "auto"; el.style.height = `${Math.min(el.scrollHeight, 160)}px`; }, [input]);
-  const sendMessage = useCallback(async () => {
-    const text = input.trim();
-    if (!text || loading) return;
-    setInput(""); setError(null);
-    const userMsg: ChatMessage = { id: `u-${Date.now()}`, role: "user", content: text };
-    const assistantMsgId = `a-${Date.now()}`;
-    const assistantMsg: ChatMessage = { id: assistantMsgId, role: "assistant", content: "", pending: true };
-    setMessages((prev) => [...prev, userMsg, assistantMsg]);
-    setLoading(true);
-    try {
-      const result = await testLLM();
-      setMessages((prev) => prev.map((m) => m.id === assistantMsgId ? { ...m, content: result.reply, pending: false } : m));
-    } catch (err) {
-      const msg = err instanceof Error ? err.message : "未知错误";
-      setError(msg);
-      setMessages((prev) => prev.filter((m) => m.id !== assistantMsgId));
-    } finally { setLoading(false); }
-  }, [input, loading]);
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendMessage(); } };
+
+function ThinkingBlock() {
   return (
-    <div className="flex flex-col h-full">
-      <div className="flex-1 overflow-y-auto px-4 py-6 space-y-5">
-        {messages.map((msg) => <MessageBubble key={msg.id} msg={msg} />)}
-        {error && <div className="text-xs text-forge-danger border border-forge-danger/20 bg-forge-danger/5 rounded-sm px-3 py-2">⚠ {error}</div>}
-        <div ref={bottomRef} />
-      </div>
-      <div className="border-t border-forge-border px-4 py-3">
-        <div className="flex items-end gap-3">
-          <textarea ref={textareaRef} value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={handleKeyDown} placeholder="输入你的回应…（Enter 发送，Shift+Enter 换行）" disabled={loading} rows={1} className="flex-1 resize-none bg-forge-surface border border-forge-border rounded-sm px-3 py-2.5 text-sm text-forge-text placeholder:text-forge-muted focus:outline-none focus:border-forge-accent/50 disabled:opacity-40 transition-colors duration-150 font-mono leading-relaxed" />
-          <button onClick={sendMessage} disabled={!input.trim() || loading} className="flex-shrink-0 px-4 py-2.5 text-xs font-semibold tracking-widest bg-forge-accent text-forge-bg rounded-sm hover:bg-forge-accent/90 active:scale-[0.97] disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-150">
-            {loading ? "..." : "SEND"}
-          </button>
+    <div className="border border-forge-border bg-forge-bg px-4 py-4">
+      <div className="flex items-center justify-between gap-4">
+        <p className="font-mono text-sm uppercase tracking-[0.18em] text-forge-accent">
+          Parsing counterparty intent
+          <span className="ml-1 inline-block h-4 w-[8px] animate-cursor-blink bg-forge-accent align-middle" />
+        </p>
+        <div className="flex items-end gap-1">
+          {[0, 1, 2, 3].map((index) => (
+            <span
+              key={index}
+              className="h-5 w-1.5 rounded-full bg-forge-accent/80 animate-signal-wave"
+              style={{ animationDelay: `${index * 0.12}s` }}
+            />
+          ))}
         </div>
-        <p className="mt-2 text-[10px] text-forge-muted">Phase 0 验证模式 · 当前模型：DeepSeek V3.2 · Enter 发送</p>
+      </div>
+      <p className="mt-3 text-sm leading-7 text-forge-secondary">
+        Streaming tactical interpretation, constraint scan, and next response framing.
+      </p>
+    </div>
+  );
+}
+
+function ConfidenceRail({ value }: { value: number }) {
+  const heights = ["h-4", "h-4", "h-5", "h-5", "h-6", "h-6", "h-5", "h-4"];
+
+  return (
+    <div className="flex items-center gap-1">
+      {Array.from({ length: 8 }, (_, index) => {
+        const active = value >= (index + 1) * 12.5;
+        return (
+          <span
+            key={index}
+            className={`${heights[index]} w-1.5 rounded-full ${active ? "bg-forge-accent" : "bg-forge-border/40"}`}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
+function PhaseIndicator({
+  currentPhase,
+  currentPhaseIndex,
+}: {
+  currentPhase: NegotiationPhaseId;
+  currentPhaseIndex: number;
+}) {
+  const { locale } = useLocale();
+  const copy = getCopy(locale);
+  const phaseDescriptors = getPhaseDescriptors(locale);
+
+  return (
+    <div className="border border-forge-border bg-forge-bg px-4 py-3">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-forge-accent">
+            {copy.chat.phase}
+          </p>
+          <p className="mt-2 text-sm text-forge-text">
+            {phaseDescriptors.find((phase) => phase.id === currentPhase)?.label}
+          </p>
+        </div>
+
+        <span className="forge-chip forge-chip-accent">
+          {phaseDescriptors.find((phase) => phase.id === currentPhase)?.description}
+        </span>
+      </div>
+
+      <div className="mt-4 grid gap-2 md:grid-cols-4">
+        {phaseDescriptors.map((phase, index) => {
+          const isActive = phase.id === currentPhase;
+          const isReached = index <= currentPhaseIndex;
+
+          return (
+            <div
+              key={phase.id}
+              className={`border px-4 py-3 transition-colors duration-150 ${
+                isActive
+                  ? "animate-phase-shift border-forge-accent/30 bg-forge-accent/10"
+                  : isReached
+                  ? "border-forge-cold/30 bg-forge-panel"
+                  : "border-forge-border bg-transparent"
+              }`}
+            >
+              <div className="flex items-center justify-between gap-3">
+                <p
+                  className={`text-[10px] font-mono uppercase tracking-[0.18em] ${
+                    isActive
+                      ? "text-forge-accent"
+                      : isReached
+                      ? "text-forge-cold"
+                      : "text-forge-secondary"
+                  }`}
+                >
+                  {phase.shortLabel}
+                </p>
+                <span
+                  className={`h-2.5 w-2.5 rounded-full ${
+                    isActive ? "bg-forge-accent" : isReached ? "bg-forge-cold" : "bg-forge-border/60"
+                  }`}
+                />
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

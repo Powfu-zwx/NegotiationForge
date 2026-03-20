@@ -1,26 +1,29 @@
-"""
-DeepSeek 适配器。
+"""DeepSeek provider adapter."""
 
-DeepSeek API 与 OpenAI 格式完全兼容，通过替换 base_url 实现接入。
-支付方式：支付宝 / 微信，充值地址：platform.deepseek.com
-"""
+from __future__ import annotations
+
+import json
 from typing import AsyncGenerator
 
 import httpx
 
 from app.core.config import settings
-from app.llm.base import LLMProvider, LLMResponse, Message
+from app.llm.base import LLMProvider, LLMProviderError, LLMResponse, Message
 
 
 class DeepSeekProvider(LLMProvider):
-
     def __init__(self) -> None:
+        self.request_timeout_seconds = 90.0
+        self.connect_timeout_seconds = 15.0
+        self.max_retries = 4
+        self.retry_base_delay_seconds = 0.8
         self._api_key = settings.deepseek_api_key
         self._base_url = settings.deepseek_base_url.rstrip("/")
         self._model = settings.deepseek_model
         self._headers = {
             "Authorization": f"Bearer {self._api_key}",
             "Content-Type": "application/json",
+            "Accept": "application/json",
         }
 
     @property
@@ -36,7 +39,7 @@ class DeepSeekProvider(LLMProvider):
     ) -> dict:
         return {
             "model": self._model,
-            "messages": [m.model_dump() for m in messages],
+            "messages": [message.model_dump() for message in messages],
             "temperature": temperature,
             "max_tokens": max_tokens,
             "stream": stream,
@@ -49,15 +52,11 @@ class DeepSeekProvider(LLMProvider):
         max_tokens: int = 1000,
     ) -> LLMResponse:
         payload = self._build_payload(messages, temperature, max_tokens, stream=False)
-
-        async with httpx.AsyncClient(timeout=60.0) as client:
-            response = await client.post(
-                f"{self._base_url}/v1/chat/completions",
-                headers=self._headers,
-                json=payload,
-            )
-            response.raise_for_status()
-            data = response.json()
+        data = await self._post_json(
+            f"{self._base_url}/v1/chat/completions",
+            headers=self._headers,
+            json_body=payload,
+        )
 
         choice = data["choices"][0]["message"]
         usage = data.get("usage", {})
@@ -77,26 +76,33 @@ class DeepSeekProvider(LLMProvider):
     ) -> AsyncGenerator[str, None]:
         payload = self._build_payload(messages, temperature, max_tokens, stream=True)
 
-        async with httpx.AsyncClient(timeout=60.0) as client:
-            async with client.stream(
-                "POST",
-                f"{self._base_url}/v1/chat/completions",
-                headers=self._headers,
-                json=payload,
-            ) as response:
-                response.raise_for_status()
-                async for line in response.aiter_lines():
-                    if not line.startswith("data: "):
-                        continue
-                    chunk = line[len("data: "):]
-                    if chunk.strip() == "[DONE]":
-                        break
-                    import json
-                    try:
-                        data = json.loads(chunk)
-                        delta = data["choices"][0].get("delta", {})
-                        text = delta.get("content", "")
-                        if text:
-                            yield text
-                    except (json.JSONDecodeError, KeyError, IndexError):
-                        continue
+        try:
+            async with httpx.AsyncClient(timeout=self._build_timeout()) as client:
+                async with client.stream(
+                    "POST",
+                    f"{self._base_url}/v1/chat/completions",
+                    headers=self._headers,
+                    json=payload,
+                ) as response:
+                    if response.is_error:
+                        await response.aread()
+                        raise self._build_http_error(response)
+
+                    async for line in response.aiter_lines():
+                        if not line.startswith("data: "):
+                            continue
+                        chunk = line[len("data: ") :].strip()
+                        if chunk == "[DONE]":
+                            break
+                        try:
+                            data = json.loads(chunk)
+                            delta = data["choices"][0].get("delta", {})
+                            text = delta.get("content", "")
+                            if text:
+                                yield text
+                        except (KeyError, IndexError, ValueError, json.JSONDecodeError):
+                            continue
+        except LLMProviderError:
+            raise
+        except (httpx.TimeoutException, httpx.TransportError) as exc:
+            raise self._build_transport_error(exc) from exc

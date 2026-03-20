@@ -1,16 +1,295 @@
-﻿@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Libre+Baskerville:wght@400;700&display=swap");
+@import "@xyflow/react/dist/style.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 :root {
-  --forge-bg: #0e0f11; --forge-surface: #16181d; --forge-border: #2a2d35;
-  --forge-muted: #4a4f5e; --forge-text: #d6d9e0; --forge-accent: #e8a838;
-  --forge-accent-dim: #7a5418; --forge-danger: #e05c5c;
+  --font-body: "IBM Plex Mono", ui-monospace, monospace;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-serif: "Libre Baskerville", Georgia, serif;
+
+  --bg-primary: #0e0f11;
+  --bg-primary-rgb: 14 15 17;
+  --bg-secondary: #16181d;
+  --bg-secondary-rgb: 22 24 29;
+  --bg-tertiary: #121419;
+  --bg-tertiary-rgb: 18 20 25;
+
+  --accent-warm: #e8a838;
+  --accent-warm-rgb: 232 168 56;
+  --accent-warm-dim: #7a5418;
+  --accent-cold: #8a93a8;
+  --accent-cold-rgb: 138 147 168;
+  --accent-alt: #c7902c;
+  --accent-alt-rgb: 199 144 44;
+  --accent-danger: #e05c5c;
+  --accent-danger-rgb: 224 92 92;
+  --accent-success: #7ab174;
+  --accent-success-rgb: 122 177 116;
+
+  --text-primary: #d6d9e0;
+  --text-primary-rgb: 214 217 224;
+  --text-secondary: #8d93a3;
+  --text-secondary-rgb: 141 147 163;
+  --text-muted: #4a4f5e;
+  --text-muted-rgb: 74 79 94;
+
+  --border-default-rgb: 42 45 53;
+  --border-default: rgb(var(--border-default-rgb) / 1);
+  --border-strong: rgb(214 217 224 / 0.08);
+  --panel-glass: rgb(var(--bg-secondary-rgb) / 1);
+  --bubble-user: #1a1c21;
+  --bubble-opponent: #16181d;
+
+  --tree-mainline: #e8a838;
+  --tree-mainline-rgb: 232 168 56;
+  --tree-branch-aggressive: #e05c5c;
+  --tree-branch-aggressive-rgb: 224 92 92;
+  --tree-branch-concede: #7ab174;
+  --tree-branch-concede-rgb: 122 177 116;
+  --tree-branch-redirect: #c7902c;
+  --tree-branch-redirect-rgb: 199 144 44;
+  --tree-branch-neutral: #8a93a8;
+  --tree-branch-neutral-rgb: 138 147 168;
 }
-* { box-sizing: border-box; }
-html, body { background-color: var(--forge-bg); color: var(--forge-text); font-family: "IBM Plex Mono", ui-monospace, monospace; -webkit-font-smoothing: antialiased; }
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--forge-bg); }
-::-webkit-scrollbar-thumb { background: var(--forge-border); border-radius: 2px; }
-::selection { background: var(--forge-accent-dim); color: var(--forge-text); }
-:focus-visible { outline: 1.5px solid var(--forge-accent); outline-offset: 2px; }
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+textarea {
+  field-sizing: content;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgb(var(--accent-warm-rgb) / 0.2);
+  color: var(--text-primary);
+}
+
+:focus-visible {
+  outline: 1px solid rgb(var(--accent-warm-rgb) / 0.9);
+  outline-offset: 2px;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--border-default-rgb) / 1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--text-muted-rgb) / 1);
+}
+
+.font-serif,
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.font-mono {
+  font-weight: 500;
+}
+
+@layer components {
+  .forge-panel,
+  .flat-panel,
+  .apple-panel {
+    @apply border border-forge-border bg-forge-surface shadow-none;
+  }
+
+  .forge-card,
+  .flat-card,
+  .apple-card,
+  .forge-soft-card {
+    @apply border border-forge-border bg-forge-panel shadow-none;
+  }
+
+  .forge-chip {
+    @apply inline-flex items-center gap-2 rounded-sm border border-forge-border bg-forge-panel px-2.5 py-1 text-[10px] font-mono uppercase tracking-[0.18em] text-forge-secondary;
+  }
+
+  .forge-chip-accent {
+    @apply border-forge-accent/40 bg-forge-accent/10 text-forge-accent;
+  }
+
+  .forge-chip-success {
+    @apply border-forge-success/40 bg-forge-success/10 text-forge-success;
+  }
+
+  .forge-chip-danger {
+    @apply border-forge-danger/40 bg-forge-danger/10 text-forge-danger;
+  }
+
+  .forge-chip-alt {
+    @apply border-forge-alt/40 bg-forge-alt/10 text-forge-alt;
+  }
+
+  .forge-input {
+    @apply w-full rounded-sm border border-forge-border bg-forge-surface px-3 py-2.5 text-sm text-forge-text outline-none transition-colors duration-150 placeholder:text-forge-muted focus:border-forge-accent/50;
+  }
+
+  .forge-button-primary {
+    @apply rounded-sm border border-forge-accent bg-forge-accent px-4 py-2.5 font-mono text-[11px] uppercase tracking-[0.18em] text-forge-bg transition-colors duration-150 hover:bg-forge-accent/90 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .forge-button-secondary {
+    @apply rounded-sm border border-forge-border bg-forge-surface px-4 py-2.5 font-mono text-[11px] uppercase tracking-[0.18em] text-forge-secondary transition-colors duration-150 hover:border-forge-accent/40 hover:text-forge-text;
+  }
+
+  .forge-button-danger {
+    @apply rounded-sm border border-forge-danger/50 bg-forge-danger/10 px-4 py-2.5 font-mono text-[11px] uppercase tracking-[0.18em] text-forge-danger transition-colors duration-150 hover:bg-forge-danger/15 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .forge-grid-surface {
+    background-image:
+      linear-gradient(rgb(255 255 255 / 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 0.025) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  .forge-terminal {
+    @apply border border-forge-border bg-forge-panel shadow-none;
+  }
+}
+
+.forge-topbar {
+  border: 1px solid rgb(var(--border-default-rgb) / 1);
+  background: var(--bg-secondary);
+}
+
+.react-flow {
+  background: var(--bg-primary);
+}
+
+.react-flow__pane {
+  cursor: grab;
+}
+
+.react-flow__pane.dragging {
+  cursor: grabbing;
+}
+
+.react-flow__node {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.react-flow__handle {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.react-flow__controls {
+  overflow: hidden;
+  border: 1px solid rgb(var(--border-default-rgb) / 1);
+  border-radius: 2px;
+  background: var(--bg-secondary);
+  box-shadow: none;
+}
+
+.react-flow__controls-button {
+  border-bottom: 1px solid rgb(var(--border-default-rgb) / 1);
+  background: transparent;
+  color: var(--text-secondary);
+}
+
+.react-flow__controls-button:hover {
+  background: rgb(var(--accent-warm-rgb) / 0.08);
+  color: var(--text-primary);
+}
+
+.react-flow__controls-button:last-child {
+  border-bottom: 0;
+}
+
+.react-flow__minimap {
+  border: 1px solid rgb(var(--border-default-rgb) / 1);
+  border-radius: 2px;
+  background: var(--bg-secondary);
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.fork-tree-shell {
+  height: 100%;
+  min-height: 0;
+}
+
+.fork-detail-panel {
+  min-height: 0;
+  border-left: 1px solid rgb(var(--border-default-rgb) / 1);
+  background: var(--bg-secondary);
+}
+
+.fork-tree-fullscreen-host {
+  min-height: 0;
+}
+
+.fork-tree-fullscreen-host:fullscreen {
+  padding: 0;
+  background: var(--bg-primary);
+}
+
+.fork-tree-fullscreen-host:fullscreen::backdrop {
+  background: var(--bg-primary);
+}
+
+@media (max-width: 1500px) {
+  .fork-tree-shell > div:last-child {
+    grid-template-columns: minmax(0, 1fr) 320px;
+  }
+}

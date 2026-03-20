@@ -1,0 +1,119 @@
+{
+  "schema_version": "1.0",
+  "scenario_id": "rental_001",
+  "metadata": {
+    "title": "租房压价谈判",
+    "description": "租客看中一套空置已久的公寓，与房东直接谈判，试图压低月租",
+    "category": "日常",
+    "difficulty": "easy",
+    "estimated_rounds": 8
+  },
+  "context": {
+    "setting": "某一线城市内环，两居室公寓，挂牌月租 7500 元，空置已超 6 周",
+    "background_shared": "双方均知晓：房源已挂牌一段时间，租客有意向入住，双方正在进行租金及条款的直接谈判"
+  },
+  "player": {
+    "role": "租客",
+    "identity": "已工作两年的职场人，计划独立租住或与一位朋友合租",
+    "objective": "以尽量低的月租签下该房源，理想价格在 6500 元以内",
+    "private_info": {
+      "current_salary": null,
+      "competing_offer": {
+        "exists": true,
+        "amount": 6800,
+        "company_attractiveness": "low",
+        "description": "附近一套同面积公寓的挂牌价 6800 元，但位置稍偏，采光一般"
+      },
+      "ideal_salary": 6500,
+      "reservation_point": 7200
+    },
+    "cards": [
+      {
+        "card_id": "nearby_listing",
+        "label": "周边参考房源",
+        "description": "提及附近同类房源挂牌价更低，暗示自己有替代选择",
+        "effect": "房东对挂牌价的信心下降，让步意愿提高",
+        "cost": "房东可能追问具体房源；若信息被识破为虚张声势，谈判信任度下降",
+        "optimal_timing": "对方坚持挂牌价、拒绝任何让步时使用"
+      },
+      {
+        "card_id": "lump_sum_payment",
+        "label": "季付或半年付",
+        "description": "提出一次性支付 3 个月或 6 个月租金，换取月租价格优惠",
+        "effect": "减少房东收租风险，换取实质性降价，成功率较高",
+        "cost": "需要一次性支出较大金额，对自身现金流有压力",
+        "optimal_timing": "双方价格差距在 300~500 元区间、陷入僵持时使用"
+      },
+      {
+        "card_id": "defect_list",
+        "label": "房屋瑕疵清单",
+        "description": "列举房屋的具体问题（墙面、设施老化等），以此合理化压价请求",
+        "effect": "为压价提供客观依据，降低对方防御心理",
+        "cost": "可能令房东感到被挑剔，情绪上产生抵触",
+        "optimal_timing": "开场或第一轮报价时使用，作为锚定依据"
+      }
+    ]
+  },
+  "opponent": {
+    "role": "房东",
+    "name": "张先生",
+    "identity": "持有该套公寓约 8 年的个人房东，无中介，自行出租管理",
+    "personality": {
+      "style": "外表强硬，惯用'这个价格很合理'来封堵讨价还价，但底气不足",
+      "pressure_response": "被直接施压要求降价时会产生逆反；但对'我再考虑一下其他房子'的暗示反应明显，容易在拖延中主动软化",
+      "rationality": 0.55,
+      "description": "情感驱动明显，对空置时间焦虑但不愿承认；对诚恳、有礼貌的租客更愿意让步；被强硬对待时会变得固执"
+    },
+    "objective": "以不低于 7000 元的月租出租房屋，同时希望租客能长期稳定居住",
+    "private_info": {
+      "budget_ceiling": 7500,
+      "opening_offer": 7500,
+      "internal_valuation": 7000,
+      "has_backup_candidates": false,
+      "backup_candidates_quality": "none",
+      "company_profit_pressure": true
+    },
+    "reservation_point": 6500,
+    "target": 7200,
+    "initial_state": {
+      "satisfaction": 50,
+      "patience": 65,
+      "current_strategy": "anchoring",
+      "disclosed_info": [],
+      "concession_history": []
+    }
+  },
+  "negotiation_structure": {
+    "phases": [
+      {
+        "phase_id": "opening",
+        "label": "开场定价",
+        "typical_rounds": "1~2",
+        "description": "房东坚持挂牌价，租客提出首次还价或表达异议"
+      },
+      {
+        "phase_id": "probing",
+        "label": "试探摸底",
+        "typical_rounds": "3~4",
+        "description": "双方通过问题和信息透露测试对方的底线与灵活度"
+      },
+      {
+        "phase_id": "bargaining",
+        "label": "条件交换",
+        "typical_rounds": "5~7",
+        "description": "价格与附加条件（付款方式、入住时间、家电维修责任）进行实质交换"
+      },
+      {
+        "phase_id": "closing",
+        "label": "收尾拍板",
+        "typical_rounds": "8+",
+        "description": "双方向协议靠拢并确认最终条款，或因差距过大谈判搁置"
+      }
+    ],
+    "termination_conditions": {
+      "agreement": "双方就月租金额及主要条款（付款方式、入住时间）达成明确共识",
+      "breakdown": "任意一方明确表示不再继续谈判，或耐心值归零",
+      "max_rounds": 15
+    }
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "schema_version": "1.0",
+  "scenario_id": "postgrad_001",
+  "metadata": {
+    "title": "保研面试争取导师名额",
+    "description": "本科生与目标导师进行一对一面谈，争取唯一的保研直博名额，双方信息不对称，学生需要在适当时机亮出优势",
+    "category": "高风险",
+    "difficulty": "medium",
+    "estimated_rounds": 10
+  },
+  "context": {
+    "setting": "某 985 高校计算机学院，导师办公室，保研推免季。导师今年只有 1 个直博名额，已有一位候选人进行过初步沟通",
+    "background_shared": "双方均知晓：该导师今年名额紧张，学生已提交申请材料，本次为正式面谈；学生绩点排名前 10%，有基础的科研经历"
+  },
+  "player": {
+    "role": "保研申请人",
+    "identity": "计算机专业大四学生，绩点 3.8/4.0，有一段校内实验室的科研经历，对导师研究方向有具体了解",
+    "objective": "获得导师的明确接收意向，争取唯一直博名额",
+    "private_info": {
+      "current_salary": null,
+      "competing_offer": {
+        "exists": true,
+        "amount": null,
+        "company_attractiveness": "low",
+        "description": "另一所 985 院校的导师已通过邮件表达接收意向，但研究方向是自然语言处理，非本人首选的系统方向；需在推免截止前做出决定"
+      },
+      "ideal_salary": 0,
+      "reservation_point": 0
+    },
+    "cards": [
+      {
+        "card_id": "research_contribution",
+        "label": "核心科研贡献披露",
+        "description": "主动介绍一段简历上未充分展示的具体科研工作：曾独立复现一篇 OSDI 论文的核心模块，并发现一处可优化的实现路径",
+        "effect": "直接命中导师当前项目的技术短板，重构导师对候选人价值的判断；满意度显著提升",
+        "cost": "若介绍时机过早或叙述不够清晰，可能显得像在背稿，反而降低真实感",
+        "optimal_timing": "导师询问具体科研能力或对编程实践能力产生疑问时使用"
+      },
+      {
+        "card_id": "backup_advisor_hint",
+        "label": "备选导师意向暗示",
+        "description": "以自然方式提及自己仍在与另一所学校的导师保持沟通，需要在推免截止前做出决定",
+        "effect": "导师感受到竞争信号，加快对候选人的评估和表态",
+        "cost": "若语气过于直白或带有要挟意味，学术型导师可能产生反感，认为学生功利性过强",
+        "optimal_timing": "面谈已进行过半、导师尚未表态时使用，以提及'时间压力'的方式间接引出"
+      },
+      {
+        "card_id": "research_proposal",
+        "label": "研究计划主动提案",
+        "description": "针对导师当前课题提出一个具体的改进思路或研究切入点，主动将面试从'被考核'转变为'学术讨论'",
+        "effect": "导师从评估者转变为对话者，对候选人的研究潜力形成正向印象；有助于在多名候选人中形成记忆点",
+        "cost": "提案若准备不充分、逻辑漏洞明显，反而暴露短板",
+        "optimal_timing": "导师问及'你对我们组的研究有什么了解'或'你有什么问题想问我'时使用"
+      }
+    ]
+  },
+  "opponent": {
+    "role": "博士生导师",
+    "name": "周建国教授",
+    "identity": "计算机系统方向教授，博士生导师，主持一项国家级课题，明年需要开题，急需一名编程能力强的直博生",
+    "personality": {
+      "style": "学术型权威风格，习惯主导谈话节奏，喜欢用开放性问题测试学生的思维方式；对'过度包装'和空洞表达高度敏感",
+      "pressure_response": "被学生直接追问'您能确认接收我吗'时会回避并转移话题；对学生主动提出具体的研究贡献和方向思考会认真重新评估，偶尔打破惯常节奏主动深入追问",
+      "rationality": 0.72,
+      "description": "以研究能力和潜力为核心评估维度，但对学生的表达方式和态度也有直觉判断；对逻辑清晰、有真实科研积累的学生会主动拉长谈话时间，这是接收意向的重要信号"
+    },
+    "objective": "找到编程能力强、能快速上手课题的直博生，最优先考虑系统方向有实践经验的候选人",
+    "private_info": {
+      "budget_ceiling": 1,
+      "opening_offer": 0,
+      "internal_valuation": 0,
+      "has_backup_candidates": true,
+      "backup_candidates_quality": "low",
+      "company_profit_pressure": true
+    },
+    "reservation_point": 0,
+    "target": 0,
+    "initial_state": {
+      "satisfaction": 55,
+      "patience": 75,
+      "current_strategy": "probing",
+      "disclosed_info": [
+        "今年名额确实只有一个",
+        "组里目前的研究方向集中在分布式存储系统"
+      ],
+      "concession_history": []
+    }
+  },
+  "negotiation_structure": {
+    "phases": [
+      {
+        "phase_id": "opening",
+        "label": "背景介绍",
+        "typical_rounds": "1~2",
+        "description": "导师简要介绍课题组情况，学生进行自我介绍，双方建立初始印象"
+      },
+      {
+        "phase_id": "probing",
+        "label": "能力考察",
+        "typical_rounds": "3~5",
+        "description": "导师通过具体问题测试学生的研究思维、技术能力和对课题的了解深度"
+      },
+      {
+        "phase_id": "bargaining",
+        "label": "价值呈现",
+        "typical_rounds": "6~8",
+        "description": "学生在关键时机亮出核心筹码，导师重新评估候选人的匹配度"
+      },
+      {
+        "phase_id": "closing",
+        "label": "意向表态",
+        "typical_rounds": "9+",
+        "description": "导师给出明确或模糊的接收信号，或明确表示候选人不符合当前需求"
+      }
+    ],
+    "termination_conditions": {
+      "agreement": "导师明确表示有接收意向，或约定进一步的试读安排",
+      "breakdown": "导师明确表示候选人不适合当前课题组，或学生主动放弃",
+      "max_rounds": 18
+    }
+  }
+}

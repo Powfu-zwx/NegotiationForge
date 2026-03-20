@@ -1,0 +1,119 @@
+{
+  "schema_version": "1.0",
+  "scenario_id": "supplier_001",
+  "metadata": {
+    "title": "SaaS 年度合同续签谈判",
+    "description": "企业采购负责人与 SaaS 供应商销售总监谈年度合同续签，采购方要求降价或扩展席位配额",
+    "category": "商务",
+    "difficulty": "medium",
+    "estimated_rounds": 12
+  },
+  "context": {
+    "setting": "某中型互联网公司的采购部门，当前使用的项目管理 SaaS 工具合同将在 30 天后到期",
+    "background_shared": "双方均知晓：合同即将到期，采购方已使用该产品约 18 个月，供应商需要完成续签；当前合同价为每年 24 万元，覆盖 80 个席位"
+  },
+  "player": {
+    "role": "采购负责人",
+    "identity": "负责公司软件采购的运营总监，直接向 CFO 汇报",
+    "objective": "在续签时将年度费用压低至 18 万以内，或以原价换取席位扩展至 120 个",
+    "private_info": {
+      "current_salary": null,
+      "competing_offer": {
+        "exists": true,
+        "amount": 180000,
+        "company_attractiveness": "low",
+        "description": "已获得竞品供应商的报价 18 万/年含 100 席位，但切换需要 2~3 个月迁移周期，内部阻力较大"
+      },
+      "ideal_salary": 180000,
+      "reservation_point": 216000
+    },
+    "cards": [
+      {
+        "card_id": "competitor_quote",
+        "label": "竞品报价单",
+        "description": "出示竞品供应商的正式报价，价格更低或席位更多",
+        "effect": "销售总监满意度下降，让步幅度提高；触发对方的留客预算授权",
+        "cost": "对方会追问迁移可行性；若被识破为虚张声势或迁移意愿明显不强，筹码贬值",
+        "optimal_timing": "对方拒绝任何价格调整时使用，需配合具体数字增强可信度"
+      },
+      {
+        "card_id": "multi_year_commitment",
+        "label": "多年合同承诺",
+        "description": "提出签订 2~3 年长期合同，换取当期年费折扣",
+        "effect": "供应商获得确定性收入，通常愿意给出 10~15% 折扣",
+        "cost": "锁定周期较长，若产品后续不满意则处于被动",
+        "optimal_timing": "价格谈判陷入僵局时提出，作为打破僵局的替代方案"
+      },
+      {
+        "card_id": "budget_deadline",
+        "label": "预算截止日期",
+        "description": "告知对方本季度采购预算在月底归零，无法结转",
+        "effect": "为供应商制造时间压力，推动加快决策和让步",
+        "cost": "可能被对方识破为谈判策略；若合同未在月底前签成，说辞难以自圆",
+        "optimal_timing": "谈判进入尾声但双方仍有价格差距时使用"
+      }
+    ]
+  },
+  "opponent": {
+    "role": "销售总监",
+    "name": "陈晓峰",
+    "identity": "负责大客户续签的销售总监，本季度续签 KPI 完成率 70%，压力明显",
+    "personality": {
+      "style": "职业型销售，擅长将价格谈判引导至'价值讨论'；话术流畅，不轻易暴露让步空间",
+      "pressure_response": "被威胁切换竞品时会先质疑迁移可行性，再小幅让步；对捆绑条件替代直接降价更为积极",
+      "rationality": 0.8,
+      "description": "高度理性，严格遵循定价策略，但在季度末有完成 KPI 的现实压力；对能提供案例背书或长期承诺的客户有特别授权空间"
+    },
+    "objective": "以不低于原价 22 万完成续签，尽量维持单价不变",
+    "private_info": {
+      "budget_ceiling": 240000,
+      "opening_offer": 240000,
+      "internal_valuation": 200000,
+      "has_backup_candidates": false,
+      "backup_candidates_quality": "none",
+      "company_profit_pressure": true
+    },
+    "reservation_point": 180000,
+    "target": 220000,
+    "initial_state": {
+      "satisfaction": 55,
+      "patience": 75,
+      "current_strategy": "anchoring",
+      "disclosed_info": [],
+      "concession_history": []
+    }
+  },
+  "negotiation_structure": {
+    "phases": [
+      {
+        "phase_id": "opening",
+        "label": "需求确认",
+        "typical_rounds": "1~2",
+        "description": "采购方提出续签诉求（降价或扩席位），销售方回应并重申产品价值"
+      },
+      {
+        "phase_id": "probing",
+        "label": "条件摸底",
+        "typical_rounds": "3~5",
+        "description": "双方试探对方的真实底线，销售方评估客户流失风险，采购方评估迁移成本"
+      },
+      {
+        "phase_id": "bargaining",
+        "label": "方案交锋",
+        "typical_rounds": "6~10",
+        "description": "价格、席位、合同周期、附加服务等条件进行多维度交换"
+      },
+      {
+        "phase_id": "closing",
+        "label": "收尾签约",
+        "typical_rounds": "11+",
+        "description": "双方确认最终方案，推动合同落地，或因差距过大进入冷却期"
+      }
+    ],
+    "termination_conditions": {
+      "agreement": "双方就年度费用、席位数量及合同周期达成明确共识",
+      "breakdown": "采购方明确启动竞品迁移流程，或销售方失去续签授权",
+      "max_rounds": 20
+    }
+  }
+}

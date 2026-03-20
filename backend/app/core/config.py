@@ -31,14 +31,16 @@ class Settings(BaseSettings):
 
     # OpenAI（备用）
     openai_api_key: str = ""
+    openai_base_url: str = "https://api.openai.com/v1"
     openai_model: str = "gpt-4o-mini"
 
     # Gemini（备用）
     gemini_api_key: str = ""
+    gemini_base_url: str = "https://generativelanguage.googleapis.com/v1beta"
     gemini_model: str = "gemini-2.0-flash"
 
     # ── 数据库 ──
-    database_url: str = "sqlite:///./negotiationforge.db"
+    database_url: str = "sqlite+aiosqlite:///./negotiationforge.db"
 
 
 # 全局单例，整个应用共享同一个 Settings 实例

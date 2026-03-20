@@ -1,0 +1,117 @@
+{
+  "schema_version": "1.0",
+  "scenario_id": "severance_001",
+  "metadata": {
+    "title": "裁员补偿谈判",
+    "description": "公司以业务调整为由裁员，员工与 HR 就离职补偿方案进行博弈，员工掌握一定信息优势",
+    "category": "职场",
+    "difficulty": "hard",
+    "estimated_rounds": 12
+  },
+  "context": {
+    "setting": "某互联网公司会议室，HR 已发出单独谈话邀约，员工已知悉自己在本次裁员名单中，双方进行一对一补偿方案沟通",
+    "background_shared": "双方均知晓：本次裁员属于公司业务线收缩，公司已给出法定 N+1 补偿方案，员工工龄 4 年，当前月薪 25000 元"
+  },
+  "player": {
+    "role": "被裁员工",
+    "identity": "工龄 4 年的高级产品经理，绩效记录良好，对公司内部流程较为熟悉",
+    "objective": "将离职补偿从法定 N+1（5 个月，约 12.5 万）提升至 N+2 或以上，并争取职业推荐信",
+    "private_info": {
+      "current_salary": 25000,
+      "competing_offer": null,
+      "ideal_salary": 175000,
+      "reservation_point": 125000
+    },
+    "cards": [
+      {
+        "card_id": "internal_email_evidence",
+        "label": "内部邮件证据",
+        "description": "暗示自己持有一份邮件记录，内容涉及裁员决策过程中可能存在的不合规操作，但不直接出示",
+        "effect": "HR 满意度明显下降，产生法律风险意识；可能触发 HR 主动提高补偿以换取平息",
+        "cost": "若信息被核实为夸大或误读，公信力受损；过早使用会让 HR 转入法务处理流程，谈判主导权丧失",
+        "optimal_timing": "HR 拒绝任何超出 N+1 的讨论时使用，以暗示而非明示为佳"
+      },
+      {
+        "card_id": "arbitration_threat",
+        "label": "劳动仲裁申请",
+        "description": "明确告知对方自己正在考虑或已准备提交劳动仲裁申请",
+        "effect": "HR 感受到最高级别威胁，触发公司法务审查；补偿谈判空间通常会显著扩大",
+        "cost": "仲裁流程耗时 3~6 个月，结果不确定；此牌一出，友好谈判气氛基本终止",
+        "optimal_timing": "所有沟通均无进展、确认愿意承担流程代价时使用，作为最后手段"
+      },
+      {
+        "card_id": "recommendation_letter",
+        "label": "职业推荐信要求",
+        "description": "提出以接受现有补偿方案为条件，换取来自直属上级或高管的正式推荐信",
+        "effect": "非货币补偿置换，HR 接受成本低，但对员工求职有实际价值",
+        "cost": "接受推荐信作为置换意味着放弃继续争取更高货币补偿的筹码",
+        "optimal_timing": "货币补偿差距已缩小但仍有分歧时，作为促成协议的最终条件使用"
+      }
+    ]
+  },
+  "opponent": {
+    "role": "HR 总监",
+    "name": "刘静",
+    "identity": "负责本次裁员沟通的 HR 总监，对接法务部门，有一定的补偿授权空间但受到流程约束",
+    "personality": {
+      "style": "表面同情，措辞温和，实质是执行公司政策的专业执行者；擅长用'流程规定''公司政策'来回避实质让步",
+      "pressure_response": "提到劳动仲裁时会明显收紧话题并转向程序说明；对情绪激动的员工态度会更加强硬；对冷静、有据可查的诉求反而会认真评估",
+      "rationality": 0.65,
+      "description": "理性执行为主，但对潜在法律风险有真实的敏感度；在感受到具体法律威胁（而非情绪宣泄）时，有授权给出 N+2 方案"
+    },
+    "objective": "以 N+1 标准完成本次补偿沟通，让员工签署离职协议，避免任何法律纠纷",
+    "private_info": {
+      "budget_ceiling": 200000,
+      "opening_offer": 125000,
+      "internal_valuation": 150000,
+      "has_backup_candidates": false,
+      "backup_candidates_quality": "none",
+      "company_profit_pressure": true
+    },
+    "reservation_point": 100000,
+    "target": 125000,
+    "initial_state": {
+      "satisfaction": 50,
+      "patience": 70,
+      "current_strategy": "anchoring",
+      "disclosed_info": [
+        "本次补偿方案依据《劳动合同法》N+1 标准制定",
+        "公司本次涉及多个部门的结构性调整"
+      ],
+      "concession_history": []
+    }
+  },
+  "negotiation_structure": {
+    "phases": [
+      {
+        "phase_id": "opening",
+        "label": "方案告知",
+        "typical_rounds": "1~2",
+        "description": "HR 正式告知 N+1 补偿方案，员工表达接受或异议"
+      },
+      {
+        "phase_id": "probing",
+        "label": "诉求表达",
+        "typical_rounds": "3~5",
+        "description": "员工提出更高补偿诉求并给出理由，HR 试探员工的底线和行动意愿"
+      },
+      {
+        "phase_id": "bargaining",
+        "label": "筹码博弈",
+        "typical_rounds": "6~10",
+        "description": "员工逐步打出信息牌，HR 评估法律风险并在授权范围内调整方案"
+      },
+      {
+        "phase_id": "closing",
+        "label": "签署或对抗",
+        "typical_rounds": "11+",
+        "description": "员工接受最终方案并签署协议，或启动正式法律途径"
+      }
+    ],
+    "termination_conditions": {
+      "agreement": "员工同意签署离职协议，双方就补偿金额及其他条件（推荐信等）达成共识",
+      "breakdown": "员工明确宣布提交劳动仲裁，或 HR 终止谈判并转交法务",
+      "max_rounds": 20
+    }
+  }
+}

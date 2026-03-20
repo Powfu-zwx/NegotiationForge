@@ -1,0 +1,119 @@
+{
+  "schema_version": "1.0",
+  "scenario_id": "funding_001",
+  "metadata": {
+    "title": "天使轮融资估值谈判",
+    "description": "早期创始人与天使投资人就融资金额与估值进行博弈，双方都需要这笔交易，但都不能先软",
+    "category": "高风险",
+    "difficulty": "hard",
+    "estimated_rounds": 15
+  },
+  "context": {
+    "setting": "某创业公司完成 MVP 验证，月活约 3000，正在寻求天使轮融资；投资人通过共同联系人介绍，已做过初步尽调",
+    "background_shared": "双方均知晓：公司处于天使轮阶段，产品有初步数据但尚未盈利；此次谈判的核心分歧在于投前估值和股权比例"
+  },
+  "player": {
+    "role": "创始人",
+    "identity": "CEO 兼联合创始人，技术背景，首次融资经历",
+    "objective": "以不低于 2000 万投前估值完成融资，出让股权不超过 15%，目标融资额 300 万",
+    "private_info": {
+      "current_salary": null,
+      "competing_offer": {
+        "exists": true,
+        "amount": 15000000,
+        "company_attractiveness": "low",
+        "description": "另一位天使投资人口头表达过意向，给出 1500 万投前估值，但尚未出具正式 TS，对方投后管理风格强势"
+      },
+      "ideal_salary": 20000000,
+      "reservation_point": 15000000
+    },
+    "cards": [
+      {
+        "card_id": "term_sheet_hint",
+        "label": "意向 TS 暗示",
+        "description": "透露手上有另一位投资人的意向 Term Sheet，但不主动出示具体条款",
+        "effect": "投资人感受到竞争压力，加快决策并提高估值意愿",
+        "cost": "投资人可能要求出示文件核实；若被识破为虚张声势，公信力大幅受损，谈判可能直接终止",
+        "optimal_timing": "投资人坚持压低估值至 1200 万以下时使用，需配合模糊说辞保留弹性"
+      },
+      {
+        "card_id": "benchmark_valuation",
+        "label": "行业对标数据",
+        "description": "引用同阶段、同赛道公司的融资估值案例，为当前估值提供市场锚点",
+        "effect": "将估值讨论从主观判断转向客观参照，削弱投资人压价的合理性",
+        "cost": "投资人可能质疑案例的可比性，需要提前准备充分的数据支撑",
+        "optimal_timing": "开场锚定阶段或对方提出明显低估值时使用"
+      },
+      {
+        "card_id": "milestone_commitment",
+        "label": "关键里程碑承诺",
+        "description": "主动承诺融资后 6 个月内达成具体指标（月活翻倍、收入破零），以确定性换估值",
+        "effect": "降低投资人的感知风险，提高对高估值的接受度",
+        "cost": "承诺未达成时会损害投后关系，甚至触发回购或对赌条款的追加要求",
+        "optimal_timing": "投资人反复强调风险过高时使用，主动提出而非被动接受对赌"
+      }
+    ]
+  },
+  "opponent": {
+    "role": "天使投资人",
+    "name": "王磊",
+    "identity": "个人天使投资人，前连续创业者，已有 12 个早期项目投资经验，近期刚完成一笔退出",
+    "personality": {
+      "style": "喜欢用苛刻问题测试创始人的压力反应和商业判断；表面挑剔，实则对坚定而有逻辑的创始人评价极高",
+      "pressure_response": "遇到情绪化或自我辩护式回应会明显降低兴趣；遇到数据驱动的反驳会认真重新评估，偶尔公开承认被说服",
+      "rationality": 0.7,
+      "description": "理性为主，但对'人'有强烈的直觉判断；认为估值最终是对创始人执行力的定价，愿意为极度认可的团队突破常规报价"
+    },
+    "objective": "以不高于 1500 万投前估值投入 300 万，获得不低于 16.7% 股权",
+    "private_info": {
+      "budget_ceiling": 20000000,
+      "opening_offer": 12000000,
+      "internal_valuation": 15000000,
+      "has_backup_candidates": true,
+      "backup_candidates_quality": "low",
+      "company_profit_pressure": false
+    },
+    "reservation_point": 10000000,
+    "target": 14000000,
+    "initial_state": {
+      "satisfaction": 60,
+      "patience": 70,
+      "current_strategy": "probing",
+      "disclosed_info": [],
+      "concession_history": []
+    }
+  },
+  "negotiation_structure": {
+    "phases": [
+      {
+        "phase_id": "opening",
+        "label": "估值锚定",
+        "typical_rounds": "1~3",
+        "description": "创始人提出目标估值，投资人给出初始报价，双方亮出各自的定价逻辑"
+      },
+      {
+        "phase_id": "probing",
+        "label": "尽调追问",
+        "typical_rounds": "4~7",
+        "description": "投资人通过提问测试创始人对业务、竞争和风险的认知；创始人借机展示信息优势"
+      },
+      {
+        "phase_id": "bargaining",
+        "label": "条款交锋",
+        "typical_rounds": "8~13",
+        "description": "估值、股权比例、投后条款（优先清算权、反稀释条款）进行实质博弈"
+      },
+      {
+        "phase_id": "closing",
+        "label": "握手或搁置",
+        "typical_rounds": "14+",
+        "description": "双方达成 TS 口头共识，或因条款分歧过大暂时搁置"
+      }
+    ],
+    "termination_conditions": {
+      "agreement": "双方就投前估值、融资金额及核心条款达成口头共识，约定出具正式 TS",
+      "breakdown": "投资人明确表示 Pass，或创始人明确拒绝并终止谈判",
+      "max_rounds": 25
+    }
+  }
+}

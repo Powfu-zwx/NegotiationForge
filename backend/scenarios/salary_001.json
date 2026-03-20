@@ -1,0 +1,119 @@
+{
+  "schema_version": "1.0",
+  "scenario_id": "salary_001",
+  "metadata": {
+    "title": "初级后端工程师薪资谈判",
+    "description": "3 年经验后端工程师与科技公司 HR 进行入职薪资谈判",
+    "category": "职场",
+    "difficulty": "medium",
+    "estimated_rounds": 10
+  },
+  "context": {
+    "setting": "某中型科技公司，候选人已通过全部技术面试，进入 offer 谈判阶段",
+    "background_shared": "双方均知晓：候选人有 3 年后端经验，已通过技术面试，公司正在招聘该岗位"
+  },
+  "player": {
+    "role": "候选人",
+    "identity": "3 年经验后端工程师",
+    "objective": "争取尽可能高的月薪",
+    "private_info": {
+      "current_salary": 22000,
+      "competing_offer": {
+        "exists": true,
+        "amount": 26000,
+        "company_attractiveness": "low",
+        "description": "另一家公司的 offer，但业务方向兴趣不大"
+      },
+      "ideal_salary": 30000,
+      "reservation_point": 26000
+    },
+    "cards": [
+      {
+        "card_id": "competing_offer",
+        "label": "竞争 offer",
+        "description": "透露手中有另一家公司开价 26k 的 offer",
+        "effect": "对手满意度下降，让步概率提高",
+        "cost": "一旦使用，对手会追问细节；若信息被识破为虚张声势，公信力下降",
+        "optimal_timing": "在对方报价明显低于你心理底线时使用"
+      },
+      {
+        "card_id": "skill_proof",
+        "label": "能力背书",
+        "description": "提供具体的项目经历和技术指标",
+        "effect": "对手认可溢价理由，更愿意内部争取",
+        "cost": "无明显代价",
+        "optimal_timing": "对方要求提供内部说服材料时使用"
+      },
+      {
+        "card_id": "deadline_pressure",
+        "label": "决策时限",
+        "description": "透露竞争 offer 有响应时限",
+        "effect": "对手感受到时间压力，可能加快决策",
+        "cost": "可能被对方反向施压，要求更快做决定",
+        "optimal_timing": "谈判陷入僵局时使用"
+      }
+    ]
+  },
+  "opponent": {
+    "role": "HR 总监",
+    "name": "李明",
+    "identity": "负责此次 offer 谈判的 HR 总监",
+    "personality": {
+      "style": "直接务实，不喜欢绕弯子",
+      "pressure_response": "被强硬施压时会稍微让步，但会拖延并要求对方给出理由",
+      "rationality": 0.75,
+      "description": "大部分时候理性，但在感受到候选人诚意或竞争威胁时会突破预算限制"
+    },
+    "objective": "以尽量低的薪资完成招聘",
+    "private_info": {
+      "budget_ceiling": 30000,
+      "opening_offer": 24000,
+      "internal_valuation": 28000,
+      "has_backup_candidates": true,
+      "backup_candidates_quality": "low",
+      "company_profit_pressure": true
+    },
+    "reservation_point": 20000,
+    "target": 24000,
+    "initial_state": {
+      "satisfaction": 50,
+      "patience": 80,
+      "current_strategy": "anchoring",
+      "disclosed_info": [],
+      "concession_history": []
+    }
+  },
+  "negotiation_structure": {
+    "phases": [
+      {
+        "phase_id": "opening",
+        "label": "开场锚定",
+        "typical_rounds": "1~2",
+        "description": "双方亮出初始立场"
+      },
+      {
+        "phase_id": "probing",
+        "label": "试探摸底",
+        "typical_rounds": "3~5",
+        "description": "双方试探对方底线，交换信息"
+      },
+      {
+        "phase_id": "bargaining",
+        "label": "实质交锋",
+        "typical_rounds": "6~9",
+        "description": "主要的让步和条件交换发生在此阶段"
+      },
+      {
+        "phase_id": "closing",
+        "label": "收尾收敛",
+        "typical_rounds": "10+",
+        "description": "双方向协议靠拢，或谈判破裂"
+      }
+    ],
+    "termination_conditions": {
+      "agreement": "双方就具体数字和条件达成明确共识",
+      "breakdown": "任意一方明确拒绝继续谈判，或耐心值归零",
+      "max_rounds": 20
+    }
+  }
+}
